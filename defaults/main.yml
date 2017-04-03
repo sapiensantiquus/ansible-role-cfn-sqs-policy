@@ -1,0 +1,8 @@
+sqs_policy_build_dir: "{{ playbook_dir }}/build"
+sqs_policy_template_dest: "{{ sqs_policy_build_dir }}/sqs_policy.json"
+sqs_policy_template_src: "sqs_policy.j2.json"
+sqs_policy_region: "{{ region | default('') }}"
+sqs_policy_disable_rollback: False
+sqs_policy_stack_state: present
+sqs_policy_stack_description: ""
+sqs_policy_queues: ""

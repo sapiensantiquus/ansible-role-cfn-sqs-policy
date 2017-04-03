@@ -1,0 +1,2 @@
+- src: https://github.com/mGageTechOps/ansible-role-cfn-sqs.git
+  name: sqs

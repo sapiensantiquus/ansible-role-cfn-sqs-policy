@@ -1,0 +1,23 @@
+- name: Create necessary dirs
+  file:
+    state: directory
+    path: "{{ item }}"
+  with_items:
+    - "{{ sqs_policy_build_dir }}"
+
+- name: Build the CFN template
+  template:
+    src: "{{ sqs_policy_template_src }}"
+    dest: "{{ sqs_policy_template_dest }}"
+
+- name: Deploy the stack (cluster)
+  cloudformation:
+    stack_name: "{{ sqs_policy_stack_name }}"
+    template_parameters:
+      Queues: "{{ sqs_policy_queues }}"
+    region: "{{ sqs_policy_region }}"
+    disable_rollback: "{{ sqs_policy_disable_rollback }}"
+    template: "{{ sqs_policy_template_dest }}"
+    state: "{{ sqs_policy_stack_state }}"
+    tags: "{{ sqs_policy_tags }}"
+  register: sqs_policy_stack

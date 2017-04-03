@@ -1,0 +1,14 @@
+sqs_stack_name: "{{ sqs_policy_stack_name }}-sqs-queue"
+
+sqs_policy_stack_name: "ansible-role-cfn-sqs-policy-test"
+sqs_policy:
+  "Version": "2012-10-17"
+  "Statement":
+    - "Effect": "Allow"
+      "Principal":
+        "AWS": "*"
+      "Action": "SQS:SendMessage"
+      "Resource": "*"
+sqs_policy_queues: "{{ sqs_cf_output.stack_outputs.QueueURL }}"
+sqs_policy_tags:
+  "Name": "{{ sqs_policy_stack_name }}"

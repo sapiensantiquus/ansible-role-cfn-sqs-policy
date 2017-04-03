@@ -1,0 +1,18 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "{{ sqs_policy_stack_description }}",
+  "Parameters":{
+    "Queues": {
+      "Type": "CommaDelimitedList"
+    }
+  },
+  "Resources": {
+    "QueuePolicy": {
+      "Type" : "AWS::SQS::QueuePolicy",
+      "Properties" : {
+        "PolicyDocument": {{ sqs_policy | to_json}},
+        "Queues": { "Ref" : "Queues"}
+      }
+    }
+  }
+}
